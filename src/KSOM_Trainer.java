@@ -110,5 +110,7 @@ public class KSOM_Trainer extends Thread {
             System.out.println(" > [SOMTrainer] Thread Sleep: " + e);
          }
       }
+      
+      problem.stop();
    }
 }
