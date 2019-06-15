@@ -46,7 +46,7 @@ public class KSOM_Problem {
    }
 
    public void stop() {
-      trainer.stop();
+      gui.endTrainer();
    }
 
    public void renderGrid(KSOM_Grid grid, int iteration) {
