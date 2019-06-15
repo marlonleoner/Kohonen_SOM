@@ -33,6 +33,10 @@
                   <Component id="iterationsLabel" alignment="0" pref="190" max="32767" attributes="0"/>
                   <Component id="inputIterations" alignment="0" max="32767" attributes="0"/>
                   <Component id="setSettingsButton" alignment="1" max="32767" attributes="0"/>
+                  <Component id="resetSettingsButton" alignment="1" max="32767" attributes="0"/>
+                  <Component id="progressBar" alignment="0" max="32767" attributes="0"/>
+                  <Component id="curIterationsLabel" alignment="0" pref="190" max="32767" attributes="0"/>
+                  <Component id="inputCurIteration" alignment="0" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -51,7 +55,15 @@
               <Component id="inputIterations" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="setSettingsButton" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="resetSettingsButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
+              <Component id="curIterationsLabel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="inputCurIteration" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="progressBar" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="startButton" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -69,6 +81,9 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputSize">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="50"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="startButton">
       <Properties>
@@ -108,14 +123,38 @@
       </Properties>
     </Component>
     <Component class="javax.swing.JTextField" name="inputIterations">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="1000"/>
+      </Properties>
     </Component>
     <Component class="javax.swing.JButton" name="setSettingsButton">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Set Settings"/>
+        <Property name="text" type="java.lang.String" value="Set Configura&#xe7;&#xf5;es"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="setSettingsButtonActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="resetSettingsButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reset Configura&#xe7;&#xf5;es"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="resetSettingsButtonActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JProgressBar" name="progressBar">
+    </Component>
+    <Component class="javax.swing.JTextField" name="inputCurIteration">
+      <Properties>
+        <Property name="editable" type="boolean" value="false"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="curIterationsLabel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Itera&#xe7;&#xf5;es Atual"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

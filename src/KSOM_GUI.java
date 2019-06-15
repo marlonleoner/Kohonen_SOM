@@ -25,10 +25,16 @@ public class KSOM_GUI extends javax.swing.JFrame {
       iterationsLabel = new javax.swing.JLabel();
       inputIterations = new javax.swing.JTextField();
       setSettingsButton = new javax.swing.JButton();
+      resetSettingsButton = new javax.swing.JButton();
+      progressBar = new javax.swing.JProgressBar();
+      inputCurIteration = new javax.swing.JTextField();
+      curIterationsLabel = new javax.swing.JLabel();
 
       setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
       sizeLabel.setText("Tamanho do GRID");
+
+      inputSize.setText("50");
 
       startButton.setText("Start");
       startButton.setEnabled(false);
@@ -54,12 +60,26 @@ public class KSOM_GUI extends javax.swing.JFrame {
 
       iterationsLabel.setText("Iterações");
 
-      setSettingsButton.setText("Set Settings");
+      inputIterations.setText("1000");
+
+      setSettingsButton.setText("Set Configurações");
       setSettingsButton.addActionListener(new java.awt.event.ActionListener() {
          public void actionPerformed(java.awt.event.ActionEvent evt) {
             setSettingsButtonActionPerformed(evt);
          }
       });
+
+      resetSettingsButton.setText("Reset Configurações");
+      resetSettingsButton.setEnabled(false);
+      resetSettingsButton.addActionListener(new java.awt.event.ActionListener() {
+         public void actionPerformed(java.awt.event.ActionEvent evt) {
+            resetSettingsButtonActionPerformed(evt);
+         }
+      });
+
+      inputCurIteration.setEditable(false);
+
+      curIterationsLabel.setText("Iterações Atual");
 
       javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
       getContentPane().setLayout(layout);
@@ -74,7 +94,11 @@ public class KSOM_GUI extends javax.swing.JFrame {
                .addComponent(startButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                .addComponent(iterationsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
                .addComponent(inputIterations)
-               .addComponent(setSettingsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+               .addComponent(setSettingsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(resetSettingsButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(progressBar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+               .addComponent(curIterationsLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+               .addComponent(inputCurIteration))
             .addContainerGap())
       );
       layout.setVerticalGroup(
@@ -90,7 +114,15 @@ public class KSOM_GUI extends javax.swing.JFrame {
             .addComponent(inputIterations, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(setSettingsButton)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(resetSettingsButton)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(curIterationsLabel)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(inputCurIteration, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addComponent(progressBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(startButton)
             .addContainerGap())
          .addGroup(layout.createSequentialGroup()
@@ -103,6 +135,8 @@ public class KSOM_GUI extends javax.swing.JFrame {
 
    private void startButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startButtonActionPerformed
       problem.start();
+      startButton.setEnabled(false);
+      resetSettingsButton.setEnabled(false);
    }//GEN-LAST:event_startButtonActionPerformed
 
    private void setSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_setSettingsButtonActionPerformed
@@ -113,27 +147,49 @@ public class KSOM_GUI extends javax.swing.JFrame {
       inputIterations.setEnabled(false);
       setSettingsButton.setEnabled(false);
       startButton.setEnabled(true);
+      resetSettingsButton.setEnabled(true);
       
       problem.setSettings(size, iter);
    }//GEN-LAST:event_setSettingsButtonActionPerformed
+
+   private void resetSettingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_resetSettingsButtonActionPerformed
+      inputSize.setEnabled(true);
+      inputIterations.setEnabled(true);
+      setSettingsButton.setEnabled(true);
+      startButton.setEnabled(false);
+      resetSettingsButton.setEnabled(false);
+   }//GEN-LAST:event_resetSettingsButtonActionPerformed
 
    public void setGrid(KSOM_Grid grid) {
       gridRender.setGrid(grid);
    }
 
+   void endTrainer() {
+      inputSize.setEnabled(true);
+      inputIterations.setEnabled(true);
+      setSettingsButton.setEnabled(true);
+      startButton.setEnabled(false);
+      resetSettingsButton.setEnabled(false);
+   }
+
    public void render(KSOM_Grid grid, int iteration) {
+      inputCurIteration.setText(Integer.toString(iteration));
+      progressBar.setValue((iteration * 100) / Integer.parseInt(inputIterations.getText()));
       setGrid(grid);
       gridRender.render();
    }
 
    // Variables declaration - do not modify//GEN-BEGIN:variables
+   private javax.swing.JLabel curIterationsLabel;
    private KSOM_GridRender gridRender;
+   private javax.swing.JTextField inputCurIteration;
    private javax.swing.JTextField inputIterations;
    private javax.swing.JTextField inputSize;
    private javax.swing.JLabel iterationsLabel;
+   private javax.swing.JProgressBar progressBar;
+   private javax.swing.JButton resetSettingsButton;
    private javax.swing.JButton setSettingsButton;
    private javax.swing.JLabel sizeLabel;
    private javax.swing.JButton startButton;
    // End of variables declaration//GEN-END:variables
-
 }
